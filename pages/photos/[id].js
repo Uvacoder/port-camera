@@ -1,10 +1,10 @@
-export default function Photo({params}) {
+export default function Photo({photo}) {
   return (
     <div>
         <img
-          src={params.src}
+          src={photo.url_to_photo}
           width={640}
-          alt={params.alt}
+          alt={photo.alt}
         />
     </div>
   )
@@ -22,13 +22,23 @@ export async function getStaticPaths() {
   const photos = await res.json()
   const paths = photos.map((photo) => ({
     params: { 
-      id: photo.id,
-      src: photo.url_to_photo,
-      alt: photo.name
+      id: photo.id.toString(),
     },
   }))
 
   return {
     paths, fallback: false
+  }
+}
+
+export async function getStaticProps({params}) {
+  const apiUrl = process.env.API_URL + params.id
+  const res = await fetch(apiUrl, {
+    method: 'GET',
+  })
+  const photo = await res.json()
+  console.log(photo)
+  return {
+    props: { photo }
   }
 }
