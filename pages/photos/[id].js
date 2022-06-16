@@ -37,7 +37,6 @@ export async function getStaticProps({params}) {
     method: 'GET',
   })
   const photo = await res.json()
-  console.log(photo)
   return {
     props: { photo }
   }
