@@ -4,7 +4,8 @@ import Link from 'next/link'
 import NavBar from '../../components/NavBar'
 
 export async function getStaticProps() {
-  const apiUrl = process.env.API_URL
+  const apiUrl = process.env.API_URL + "photos/"
+  console.log(apiUrl)
   const res = await fetch(apiUrl, {
     method: 'GET',
   })
@@ -16,10 +17,10 @@ export async function getStaticProps() {
 
 function scanPhotos({apiUrl}) {
   console.log(apiUrl)
-  fetch(apiUrl + "scan-photos")
+  fetch(apiUrl + "scan")
 }
 
-export default function Photos({photos}) {
+export default function Photos({photos, apiUrl}) {
   return (
     <div>
       <Head>
@@ -32,7 +33,7 @@ export default function Photos({photos}) {
         <h1>
           Photos
         </h1>
-	<button onClick={scanPhotos}>Scan photos</button>
+	<button onClick={scanPhotos({apiUrl})}>Scan photos</button>
         <ul>
           {photos.map((photo) => (
 	    <li key={photo.id}>

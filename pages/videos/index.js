@@ -4,17 +4,21 @@ import Link from 'next/link'
 import NavBar from '../../components/NavBar'
 
 export async function getStaticProps() {
-  const apiUrl = process.env.API_URL
+  const apiUrl = process.env.API_URL + "videos/"
   const res = await fetch(apiUrl, {
     method: 'GET',
   })
   const videos = await res.json()
   return {
-    props: { videos }
+    props: { videos, apiUrl }
   }
 }
 
-export default function Videos({videos}) {
+function scanVideos({apiUrl}) {
+  fetch(apiUrl + "scan")
+}
+
+export default function Videos({videos, apiUrl}) {
   return (
     <div>
       <Head>
@@ -27,6 +31,7 @@ export default function Videos({videos}) {
         <h1>
           Videos
         </h1>
+	<button onClick={scanVideos({apiUrl})}>Scan videos</button>
         <ul>
           {videos.map((video) => (
 	    <li key={video.id}>
