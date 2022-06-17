@@ -1,11 +1,16 @@
+import NavBar from '../../components/NavBar'
+
 export default function Photo({photo}) {
   return (
     <div>
+      <NavBar />
+      <main>
         <img
           src={photo.url_to_photo}
           width={640}
           alt={photo.alt}
         />
+      </main>
     </div>
   )
 }

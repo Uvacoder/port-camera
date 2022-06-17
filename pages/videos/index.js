@@ -8,41 +8,31 @@ export async function getStaticProps() {
   const res = await fetch(apiUrl, {
     method: 'GET',
   })
-  const photos = await res.json()
+  const videos = await res.json()
   return {
-    props: { photos, apiUrl }
+    props: { videos }
   }
 }
 
-function scanPhotos({apiUrl}) {
-  console.log(apiUrl)
-  fetch(apiUrl + "scan-photos")
-}
-
-export default function Photos({photos}) {
+export default function Videos({videos}) {
   return (
     <div>
       <Head>
-        <title>Camera photos</title>
+        <title>Camera videos</title>
       </Head>
 
       <NavBar />
 
       <main>
         <h1>
-          Photos
+          Videos
         </h1>
-	<button onClick={scanPhotos}>Scan photos</button>
         <ul>
-          {photos.map((photo) => (
-	    <li key={photo.id}>
-              <Link href={`/photos/${encodeURIComponent(photo.id)}`}>
+          {videos.map((video) => (
+	    <li key={video.id}>
+              <Link href={`/videos/${encodeURIComponent(video.id)}`}>
                 <a>
-                  <img
-                    src={photo.url_to_thumbnail}
-                    width="380px"
-                    alt={photo.name}
-                  />
+		  {video.name}
                 </a>
               </Link>
             </li>
