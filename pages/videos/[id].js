@@ -5,7 +5,7 @@ export default function Video({video}) {
     <div>
       <NavBar />
       <main>
-        <video width="320" height="240" controls>
+        <video width="640" height="480" controls>
           <source src={video.url_to_video} type="video/mp4" />
         </video>
       </main>
