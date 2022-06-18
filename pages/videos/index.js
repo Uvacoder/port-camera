@@ -14,11 +14,11 @@ export async function getStaticProps() {
   }
 }
 
-function scanVideos({apiUrl}) {
-  fetch(apiUrl + "scan")
-}
 
 export default function Videos({videos, apiUrl}) {
+  function scanVideos() {
+    fetch(apiUrl + "scan")
+  }
   return (
     <div>
       <Head>
@@ -31,7 +31,7 @@ export default function Videos({videos, apiUrl}) {
         <h1>
           Videos
         </h1>
-	<button onClick={scanVideos({apiUrl})}>Scan videos</button>
+	<button onClick={scanVideos}>Scan videos</button>
         <ul>
           {videos.map((video) => (
 	    <li key={video.id}>

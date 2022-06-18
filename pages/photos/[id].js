@@ -16,7 +16,7 @@ export default function Photo({photo}) {
 }
 
 export async function getStaticPaths() {
-  const url = process.env.API_URL
+  const url = process.env.API_URL + "photos/"
   const myHeaders = {
       'Content-Type': 'application/json',
   }
@@ -37,7 +37,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({params}) {
-  const apiUrl = process.env.API_URL + params.id
+  const apiUrl = process.env.API_URL + "photos/" + params.id
   const res = await fetch(apiUrl, {
     method: 'GET',
   })
