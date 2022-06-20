@@ -34,6 +34,7 @@ export default function Photos({photos, apiUrl}) {
 	    <li key={photo.id}>
               <Link href={`/photos/${encodeURIComponent(photo.id)}`}>
                 <a>
+		  <p>{photo.name}</p>
                   <img
                     src={photo.url_to_thumbnail}
                     width="240px"
