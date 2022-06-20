@@ -5,6 +5,7 @@ import NavBar from '../../components/NavBar'
 
 export async function getStaticProps() {
   const apiUrl = process.env.API_URL + "videos/"
+  await fetch(apiUrl + "scan")
   const res = await fetch(apiUrl, {
     method: 'GET',
   })
@@ -16,9 +17,6 @@ export async function getStaticProps() {
 
 
 export default function Videos({videos, apiUrl}) {
-  function scanVideos() {
-    fetch(apiUrl + "scan")
-  }
   return (
     <div>
       <Head>
@@ -31,7 +29,6 @@ export default function Videos({videos, apiUrl}) {
         <h1>
           Videos
         </h1>
-	<button onClick={scanVideos}>Scan videos</button>
         <ul>
           {videos.map((video) => (
 	    <li key={video.id}>
